@@ -45,7 +45,7 @@ func pretty(v reflect.Value, depth int) string {
 		for i := 0; i < f.NumField(); i++ {
 			value := getField(f, i)
 			name := t.Field(i).Name
-			result += fmt.Sprintf(str + red(name) + ":" + pretty(value, depth+1))
+			result += str + red(name) + ":" + pretty(value, depth+1)
 			if i != f.NumField()-1 {
 				result += ",\n"
 			} else {
