@@ -11,18 +11,18 @@ func Render(s interface{}) string {
 }
 
 func pretty(v reflect.Value, depth int) string {
-	result := fmt.Sprintf("")
+	result := ""
 	switch f := v; v.Kind() {
 	case reflect.Float64:
 		r := fmt.Sprintf("%v", f.Float())
-		result += fmt.Sprintf(green(r))
+		result += green(r)
 	case reflect.Float32:
 		r := fmt.Sprintf("%v", f.Float())
-		result += fmt.Sprintf(green(r))
+		result += green(r)
 	case reflect.Slice:
 		result += "[\n"
 		for i := 0; i < v.Len(); i++ {
-			result += fmt.Sprintf(pretty(v.Index(i), depth+1))
+			result += pretty(v.Index(i), depth+1)
 			if i != v.Len()-1 {
 				result += ",\n"
 			} else {
@@ -31,10 +31,10 @@ func pretty(v reflect.Value, depth int) string {
 		}
 		result += "]"
 	case reflect.String:
-		result += fmt.Sprintf(green(f.String()))
+		result += green(f.String())
 	case reflect.Int:
 		r := fmt.Sprintf("%d", f.Int())
-		result += fmt.Sprintf(green(r))
+		result += green(r)
 	case reflect.Struct:
 		t := f.Type()
 		str := ""
