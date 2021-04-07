@@ -13,6 +13,12 @@ func Render(s interface{}) string {
 func pretty(v reflect.Value, depth int) string {
 	result := fmt.Sprintf("")
 	switch f := v; v.Kind() {
+	case reflect.Float64:
+		r := fmt.Sprintf("%v", f.Float())
+		result += fmt.Sprintf(green(r))
+	case reflect.Float32:
+		r := fmt.Sprintf("%v", f.Float())
+		result += fmt.Sprintf(green(r))
 	case reflect.Slice:
 		result += "[\n"
 		for i := 0; i < v.Len(); i++ {
