@@ -1,6 +1,8 @@
 package colorful
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestPrintList(t *testing.T) {
 	type name struct {
@@ -11,5 +13,11 @@ func TestPrintList(t *testing.T) {
 		names = append(names, name{aaa: i})
 	}
 	render := Render(names)
+	println(render)
+}
+
+func TestRenderURL(t *testing.T) {
+	url := ""
+	render := Render(url)
 	println(render)
 }
