@@ -6,17 +6,29 @@ import (
 	"time"
 )
 
-func Print(s interface{}) string {
+func Render(s interface{}) string {
 	return pretty(reflect.ValueOf(s), 0)
 }
 
 func pretty(v reflect.Value, depth int) string {
 	result := fmt.Sprintf("")
 	switch f := v; v.Kind() {
+	case reflect.Slice:
+		result += "[\n"
+		for i := 0; i < v.Len(); i++ {
+			result += fmt.Sprintf(pretty(v.Index(i), depth+1))
+			if i != v.Len()-1 {
+				result += ",\n"
+			} else {
+				result += "\n"
+			}
+		}
+		result += "]"
 	case reflect.String:
 		result += fmt.Sprintf(green(f.String()))
 	case reflect.Int:
-		result += fmt.Sprintf(green(f.String()))
+		r := fmt.Sprintf("%d", f.Int())
+		result += fmt.Sprintf(green(r))
 	case reflect.Struct:
 		t := f.Type()
 		str := ""
